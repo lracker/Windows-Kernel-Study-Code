@@ -1,0 +1,6 @@
+﻿  Building '3.2.2 使用LIST_ENTRY' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\3.2.2使用LIST_ENTRY.inf
+  Stamping [Version] section with DriverVer=02/19/2020,23.53.9.432
+  main.c
+BufferOverflowK.lib(gs_support.obj) : error LNK2019: 无法解析的外部符号 _DriverEntry@8，该符号在函数 _GsDriverEntry@8 中被引用
+C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.2使用LIST_ENTRY.sys : fatal error LNK1120: 1 个无法解析的外部命令

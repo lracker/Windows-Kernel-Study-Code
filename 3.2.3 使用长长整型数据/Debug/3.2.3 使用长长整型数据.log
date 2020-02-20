@@ -1,0 +1,22 @@
+﻿  Building '3.2.3 使用长长整型数据' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\3.2.3使用长长整型数据.inf
+  Stamping [Version] section with DriverVer=02/20/2020,11.22.39.818
+  main.c
+  3.2.3 使用长长整型数据.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.3使用长长整型数据.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.3.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.3 使用长长整型数据\3.2.3使用长长整型数据.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.3 \3.2.3.cat
+  
