@@ -1,0 +1,22 @@
+﻿  Building '4.1.2 打开和关闭文件' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\4.1.2打开和关闭文件.inf
+  Stamping [Version] section with DriverVer=02/21/2020,23.51.2.629
+  main.c
+  4.1.2 打开和关闭文件.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.1.2打开和关闭文件.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.1.2.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.1.2 打开和关闭文件\4.1.2打开和关闭文件.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.1.2 \4.1.2.cat
+  

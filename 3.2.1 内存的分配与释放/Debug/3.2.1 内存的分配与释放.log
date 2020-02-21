@@ -1,0 +1,22 @@
+﻿  Building '3.2.1 内存的分配与释放' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\3.2.1内存的分配与释放.inf
+  Stamping [Version] section with DriverVer=02/21/2020,23.46.6.298
+  main.c
+  3.2.1 内存的分配与释放.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.1内存的分配与释放.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.1.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.1 内存的分配与释放\3.2.1内存的分配与释放.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\3.2.1 \3.2.1.cat
+  
