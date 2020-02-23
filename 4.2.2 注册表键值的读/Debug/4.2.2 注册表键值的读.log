@@ -1,0 +1,22 @@
+﻿  Building '4.2.2 注册表键值的读' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\4.2.2注册表键值的读.inf
+  Stamping [Version] section with DriverVer=02/23/2020,23.55.43.29
+  main.c
+  4.2.2 注册表键值的读.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.2注册表键值的读.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.2.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.2 注册表键值的读\4.2.2注册表键值的读.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.2 \4.2.2.cat
+  

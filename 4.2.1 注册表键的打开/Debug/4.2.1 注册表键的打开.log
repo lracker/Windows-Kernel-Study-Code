@@ -1,0 +1,22 @@
+﻿  Building '4.2.1 注册表键的打开' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\4.2.1注册表键的打开.inf
+  Stamping [Version] section with DriverVer=02/23/2020,22.49.34.974
+  main.c
+  4.2.1 注册表键的打开.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.1注册表键的打开.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.1.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.1 注册表键的打开\4.2.1注册表键的打开.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.2.1 \4.2.1.cat
+  
