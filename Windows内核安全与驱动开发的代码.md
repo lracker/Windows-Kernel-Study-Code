@@ -677,3 +677,195 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg_path)
 }
 ```
 
+
+
+### 4.2.1 注册表键值的打开
+
+```c
+#include <ntddk.h>
+
+VOID DriverUnload(PDRIVER_OBJECT pDriver)
+{
+	pDriver;
+}
+
+NTSTATUS OpenRegister(PUNICODE_STRING pKeyPath)
+{
+	NTSTATUS status;
+	HANDLE MyKey = NULL;
+	OBJECT_ATTRIBUTES MyObjAttr = { 0 };
+	// 初始化OBJECT_ATTRIBUTES
+	InitializeObjectAttributes(
+		&MyObjAttr,
+		pKeyPath,
+		OBJ_CASE_INSENSITIVE,
+		NULL,
+		NULL
+	);
+	status = ZwOpenKey(&MyKey, KEY_READ, &MyObjAttr);
+	if (!NT_SUCCESS(status))
+	{
+		// 失败处理
+		//……
+	}
+	return status;
+}
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg_path)
+{
+	pDriver;
+	pReg_path;
+	NTSTATUS status;
+	UNICODE_STRING KeyPath = RTL_CONSTANT_STRING(L"\\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion");
+	status = OpenRegister(&KeyPath);
+	pDriver->DriverUnload = DriverUnload;
+	return status;
+}
+```
+
+
+
+### 4.2.2 注册表键值的读
+
+```c
+#include <ntddk.h>
+#define MEM_TAG1 'ddd'
+#define MEM_TAG2 'eee'
+
+VOID DriverUnload(PDRIVER_OBJECT pDriver)
+{
+	pDriver;
+}
+
+NTSTATUS OpenRegister(PUNICODE_STRING pKeyPath, PUNICODE_STRING pKeyName)
+{
+	NTSTATUS status;
+	HANDLE MyKeyHandle = NULL;
+	OBJECT_ATTRIBUTES MyObjAttr = { 0 };
+	// 用来试探大小的KeyInfor
+	KEY_VALUE_PARTIAL_INFORMATION KeyInfor;
+	// 最后实际用到的KeyInfor指针。内存分配在堆中
+	PKEY_VALUE_PARTIAL_INFORMATION AcKeyInfor;
+	ULONG uAcLength;
+
+	// 初始化OBJECT_ATTRIBUTES
+	InitializeObjectAttributes(
+		&MyObjAttr,
+		pKeyPath,
+		OBJ_CASE_INSENSITIVE,
+		NULL,
+		NULL
+	);
+	status = ZwOpenKey(&MyKeyHandle, KEY_READ, &MyObjAttr);
+	if (!NT_SUCCESS(status))
+	{
+		KdPrint(("打开注册表失败"));
+		return status;
+	}
+	status = ZwQueryValueKey(
+		MyKeyHandle,
+		pKeyName,
+		KeyValuePartialInformation,
+		&KeyInfor,
+		sizeof(KEY_VALUE_PARTIAL_INFORMATION),
+		&uAcLength);
+	if (!NT_SUCCESS(status) &&
+		status != STATUS_BUFFER_OVERFLOW &&
+		status != STATUS_BUFFER_TOO_SMALL)
+	{
+		KdPrint(("读取注册表键值失败"));
+		return status;
+	}
+	// 如果没有失败，那么分配足够的空间，再次读取。
+	AcKeyInfor = (PKEY_VALUE_PARTIAL_INFORMATION)ExAllocatePoolWithTag(NonPagedPool, uAcLength, MEM_TAG1);
+	if (AcKeyInfor == NULL)
+	{
+		KdPrint(("分配失败"));
+		status = STATUS_INSUFFICIENT_RESOURCES;
+		return status;
+	}
+	status = ZwQueryValueKey(
+		MyKeyHandle,
+		pKeyName,
+		KeyValuePartialInformation,
+		AcKeyInfor,
+		uAcLength,
+		&uAcLength);
+	// 到此位置，如果status为STATUS_SUCCESS，则要读取的数据已经
+	// 在AcKeyInfor->Data里面了
+	PUCHAR Buffer = (PUCHAR)ExAllocatePoolWithTag(NonPagedPool, AcKeyInfor->DataLength, MEM_TAG2);
+	RtlCopyMemory(Buffer, AcKeyInfor->Data, AcKeyInfor->DataLength);
+	UNICODE_STRING Buff;
+	Buff.Buffer = (PWCHAR)Buffer;
+	Buff.Length = Buff.MaximumLength = (USHORT)AcKeyInfor->DataLength;
+	KdPrint(("%wZ", &Buff));
+	return status;
+}
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg_path)
+{
+	pDriver;
+	pReg_path;
+	NTSTATUS status;
+	UNICODE_STRING KeyPath = RTL_CONSTANT_STRING(L"\\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion");
+	UNICODE_STRING KeyName = RTL_CONSTANT_STRING(L"SystemRoot");
+	status = OpenRegister(&KeyPath, &KeyName);
+	pDriver->DriverUnload = DriverUnload;
+	return status;
+}
+```
+
+### 4.2.3 注册表键值的写  
+
+```c
+#include <ntddk.h>
+
+VOID DriverUnload(PDRIVER_OBJECT pDriver)
+{
+	pDriver;
+}
+
+NTSTATUS WriteRegister(PUNICODE_STRING pKeyPath, PUNICODE_STRING pName, PWCHAR pValue)
+{
+	NTSTATUS status;
+	HANDLE MyKeyHandle = NULL;
+	OBJECT_ATTRIBUTES MyObjAttr = { 0 };
+	// 初始化OBJECT_ATTRIBUTES
+	InitializeObjectAttributes(
+		&MyObjAttr,
+		pKeyPath,
+		OBJ_CASE_INSENSITIVE,
+		NULL,
+		NULL
+	);
+	status = ZwOpenKey(&MyKeyHandle, KEY_READ, &MyObjAttr);
+	if (!NT_SUCCESS(status))
+	{
+		KdPrint(("打开注册表失败"));
+		return status;
+	}
+	// 写入数据。数据长度之所以要将字符串长度加上1，是为了把最后一个空结束符
+	// 写入。笔者不确定如果不写入空结束符会不会有错。有兴趣可以测试一下。
+	// （实际测试了一下，并不会出错）
+	status = ZwSetValueKey(MyKeyHandle, pName, 0, REG_SZ, pValue, (wcslen(pValue) + 1) * sizeof(WCHAR));
+	if (!NT_SUCCESS(status))
+	{
+		KdPrint(("写入注册表失败"));
+		return status;
+	}
+	return status;
+}
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg_path)
+{
+	pDriver;
+	pReg_path;
+	NTSTATUS status;
+	UNICODE_STRING KeyPath = RTL_CONSTANT_STRING(L"\\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion");
+	UNICODE_STRING Name = RTL_CONSTANT_STRING(L"Test");
+	PWCHAR pValue = { L"My Test Value" };
+	status = WriteRegister(&KeyPath, &Name, pValue);
+	pDriver->DriverUnload = DriverUnload;
+	return status;
+}
+```
