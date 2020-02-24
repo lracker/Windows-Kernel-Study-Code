@@ -35,7 +35,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.1 注册表键的打开
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.2 注册表键值的读", "4.2.2 注册表键值的读\4.2.2 注册表键值的读.vcxproj", "{9328ED1A-35DC-4E69-9C0F-4FDF65422397}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.3 注册表键的写", "4.2.3 注册表键的写\4.2.3 注册表键的写.vcxproj", "{ED1AF074-6AD8-407C-B9DA-464443182454}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4.2.3 注册表键值的写", "4.2.3 注册表键值的写\4.2.3 注册表键值的写.vcxproj", "{ED1AF074-6AD8-407C-B9DA-464443182454}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

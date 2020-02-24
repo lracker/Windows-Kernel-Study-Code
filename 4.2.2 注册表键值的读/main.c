@@ -7,7 +7,7 @@ VOID DriverUnload(PDRIVER_OBJECT pDriver)
 	pDriver;
 }
 
-NTSTATUS OpenRegister(PUNICODE_STRING pKeyPath, PUNICODE_STRING pKeyName)
+NTSTATUS ReadRegister(PUNICODE_STRING pKeyPath, PUNICODE_STRING pKeyName)
 {
 	NTSTATUS status;
 	HANDLE MyKeyHandle = NULL;
@@ -79,7 +79,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT pDriver, PUNICODE_STRING pReg_path)
 	NTSTATUS status;
 	UNICODE_STRING KeyPath = RTL_CONSTANT_STRING(L"\\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion");
 	UNICODE_STRING KeyName = RTL_CONSTANT_STRING(L"SystemRoot");
-	status = OpenRegister(&KeyPath, &KeyName);
+	status = ReadRegister(&KeyPath, &KeyName);
 	pDriver->DriverUnload = DriverUnload;
 	return status;
 }
