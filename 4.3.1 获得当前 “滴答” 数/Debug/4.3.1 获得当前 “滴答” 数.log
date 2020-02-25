@@ -1,0 +1,22 @@
+﻿  Building '4.3.1 获得当前 “滴答” 数' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping Debug\4.3.1获得当前“滴答”数.inf
+  Stamping [Version] section with DriverVer=02/25/2020,23.27.37.465
+  main.c
+  4.3.1 获得当前 “滴答” 数.vcxproj -> C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.3.1获得当前“滴答”数.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.3.1摂.sys
+  
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.3.1 获得当前 “滴答” 数\4.3.1获得当前“滴答”数.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\lracker\Documents\projects\Windows_Kernel_projects\Debug\4.3.1  摂 \4.3.1摂.cat
+  
